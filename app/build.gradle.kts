@@ -37,6 +37,14 @@ android {
     packagingOptions.jniLibs.useLegacyPackaging = true
 }
 
+kotlin {
+    jvmToolchain(21)   // 推荐方式
+    // 或者旧写法：
+    // compileKotlin {
+    //     kotlinOptions.jvmTarget = "21"
+    // }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
