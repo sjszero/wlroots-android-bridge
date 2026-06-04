@@ -16,16 +16,8 @@ jobs:
       uses: android-actions/setup-android@v3
     - name: Build with Gradle
       run: git clone -b sjszero-patch-1 --recursive https://github.com/sjszero/wlroots-android-bridge.git && cd wlroots-android-bridge && ./gradlew assembleDebug --stacktrace
-    - name: Find APK
-      run: |
-         echo "Found APK files:"
-         find . -name "*.apk" -not -path "*/test-*.apk" -print
-
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
-        name: tinywl-app
-        path: |
-          **/build/outputs/apk/**/*.apk
-          **/*.apk
-          !**/test-*.apk
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
