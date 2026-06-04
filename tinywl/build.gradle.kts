@@ -85,6 +85,14 @@ android {
     ndkVersion = "28.0.13004108"
 }
 
+kotlin {
+    jvmToolchain(21)   // 推荐方式
+    // 或者旧写法：
+    // compileKotlin {
+    //     kotlinOptions.jvmTarget = "21"
+    // }
+}
+
 dependencies {
     implementation(project(":TermuxAm"))
 }
