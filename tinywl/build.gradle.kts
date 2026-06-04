@@ -51,7 +51,7 @@ android {
                 arguments.add(
                     "-Dsdk_optional_libbinder_ndk_cpp=${sdkDirectory.absolutePath}/platforms/android-${compileSdk}/optional/libbinder_ndk_cpp",
                 )
-                abiFilters("x86_64")
+                abiFilters("arm64-v8a")
             }
         }
     }
@@ -83,6 +83,14 @@ android {
     }
 
     ndkVersion = "28.0.13004108"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
