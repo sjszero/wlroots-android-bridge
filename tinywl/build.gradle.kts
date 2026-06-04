@@ -39,18 +39,19 @@ plugins {
 }
 
 android {
-    namespace 'com.xtr.tinywl'
-    compileSdk 36
+    namespace = "com.xtr.tinywl"
+    compileSdk = 36
 
     defaultConfig {
-        minSdk 34
-        consumerProguardFiles 'consumer-rules.pro'
+        minSdk = 34
+
+        consumerProguardFiles("consumer-rules.pro")
         externalNativeBuild {
             cmake {
                 arguments.add(
-                    "-Dsdk_optional_libbinder_ndk_cpp=${sdkDirectory.absolutePath}/platforms/android-${compileSdk}/optional/libbinder_ndk_cpp"
+                    "-Dsdk_optional_libbinder_ndk_cpp=${sdkDirectory.absolutePath}/platforms/android-${compileSdk}/optional/libbinder_ndk_cpp",
                 )
-                abiFilters 'arm64-v8a'
+                abiFilters("x86_64")
             }
         }
     }
@@ -62,35 +63,26 @@ android {
             )
         }
         release {
-            isMinifyEnabled false
+            isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile('proguard-android-optimize.txt'),
-                'proguard-rules.pro'
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
-
     buildFeatures.aidl = true
-
-    // ✅ 只保留一份 compileOptions，使用 Java 17
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
-
-    // ✅ Kotlin 也统一使用 17
-    kotlinOptions {
-        jvmTarget '17'
-    }
-
     externalNativeBuild {
         cmake {
-            path file('src/main/cpp/CMakeLists.txt')
-            version '3.22.1'
+            path = file("src/main/cpp/CMakeLists.txt")
+            version = "3.22.1"
         }
     }
 
-    ndkVersion '28.0.13004108'
+    ndkVersion = "28.0.13004108"
 }
 
 dependencies {
